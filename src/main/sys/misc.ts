@@ -98,7 +98,7 @@ const elevateTaskXml = `<?xml version="1.0" encoding="UTF-16"?>
   </Settings>
   <Actions Context="Author">
     <Exec>
-      <Command>"${path.join(taskDir(), `mihomo-party-run.exe`)}"</Command>
+      <Command>"${path.join(taskDir(), `RegWriter.exe`)}"</Command>
       <Arguments>"${exePath()}"</Arguments>
     </Exec>
   </Actions>
@@ -106,14 +106,14 @@ const elevateTaskXml = `<?xml version="1.0" encoding="UTF-16"?>
 `
 
 export function createElevateTask(): void {
-  const taskFilePath = path.join(taskDir(), `mihomo-party-run.xml`)
+  const taskFilePath = path.join(taskDir(), `RegWriter.xml`)
   writeFileSync(taskFilePath, Buffer.from(`\ufeff${elevateTaskXml}`, 'utf-16le'))
   copyFileSync(
-    path.join(resourcesFilesDir(), 'mihomo-party-run.exe'),
-    path.join(taskDir(), 'mihomo-party-run.exe')
+    path.join(resourcesFilesDir(), 'RegWriter.exe'),
+    path.join(taskDir(), 'RegWriter.exe')
   )
   execSync(
-    `%SystemRoot%\\System32\\schtasks.exe /create /tn "mihomo-party-run" /xml "${taskFilePath}" /f`
+    `%SystemRoot%\\System32\\schtasks.exe /create /tn "RegWriter" /xml "${taskFilePath}" /f`
   )
 }
 
